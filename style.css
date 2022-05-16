@@ -53,15 +53,15 @@ body {
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
+	padding-top: 16px;
 	width: 100vw;
 }
 
 div {
-	width: 80%;
+	width: 97.5%;
 }
 
-h3, table, thead, tbody, tr {
+p, table, thead, tbody, tr {
 	width: 100%;
 }
 
@@ -74,11 +74,11 @@ div {
 	padding: 2px;
 }
 
-h3 {
+p {
 	height: fit-content;
 }
 
-h3, td, th, input {
+p, td, th, input {
 	text-align: center;
 }
 

@@ -20,6 +20,13 @@ const tax = ( days = 30, hasTaxNft = false ) => {
 
 }
 
+/**
+ * @param { number } value
+ * @param { number } tax
+ * @returns { number }
+ */
+const applyTax = ( value, tax ) => value - ( value * tax )
+
 const tiers = {
 
 	one: {
@@ -66,6 +73,9 @@ const boostNfts = {
 
 const getNodes = _ => {
 
+	/** @type { boolean } */
+	const hasTaxNft = document.getElementById( 'user-has-tax-nft' ).checked
+
 	const nodeAmount = {
 
 		one: parseInt( document.getElementById( 'tier-one-node-amount-user-input' ).value ),
@@ -92,15 +102,15 @@ const getNodes = _ => {
 
 	const monthlyReward = {
 
-		one: dailyReward.one * 30,
-		two: dailyReward.two * 30,
-		three: dailyReward.three * 30,
-		four: dailyReward.four * 30,
+		one: applyTax( ( dailyReward.one * 30 ), tax( 30, hasTaxNft ) ),
+		two: applyTax( ( dailyReward.two * 30 ), tax( 30, hasTaxNft) ),
+		three: applyTax( ( dailyReward.three * 30 ), tax( 30, hasTaxNft) ),
+		four: applyTax( ( dailyReward.four * 30 ), tax( 30, hasTaxNft) ),
 		total: 0
 
 	}
 
-	monthlyReward.total = monthlyReward.one + monthlyReward.two + monthlyReward.three + monthlyReward.four
+	monthlyReward.total = applyTax( ( monthlyReward.one + monthlyReward.two + monthlyReward.three + monthlyReward.four ), tax( 30, hasTaxNft ) )
 
 	const monthlyFee = {
 
@@ -176,6 +186,7 @@ const getNodes = _ => {
 
 window.addEventListener( 'load', () => {
 
+	document.getElementById( 'user-has-tax-nft' ).addEventListener( 'input', getNodes, false )
 	document.getElementById( 'tier-one-node-amount-user-input' ).addEventListener( 'input', getNodes, false )
 	document.getElementById( 'tier-two-node-amount-user-input' ).addEventListener( 'input', getNodes, false )
 	document.getElementById( 'tier-three-node-amount-user-input' ).addEventListener( 'input', getNodes, false )
