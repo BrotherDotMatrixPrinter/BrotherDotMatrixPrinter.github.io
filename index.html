@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CRN V2 Calculator</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js"></script>
+</head>
+<body>
+
+	<div>
+		<h3>Node Amounts</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Tier</th>
+					<th>Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>One</td>
+					<td><input type="number" id="tier-one-node-amount-user-input" min="0" value="0"></td>
+				</tr>
+				<tr>
+					<td>Two</td>
+					<td><input type="number" id="tier-two-node-amount-user-input" min="0" value="0"></td>
+				</tr>
+				<tr>
+					<td>Three</td>
+					<td><input type="number" id="tier-three-node-amount-user-input" min="0" value="0"></td>
+				</tr>
+				<tr>
+					<td>Four</td>
+					<td><input type="number" id="tier-four-node-amount-user-input" min="0" value="0"></td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td id="total-node-amount-user-data">0 Nodes</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<h3>Daily Rewards</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Tier</th>
+					<th>No NFT</th>
+					<th>Bronze NFT</th>
+					<th>Silver NFT</th>
+					<th>Gold NFT</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>One</td>
+					<td id="tier-one-daily-reward-user-data">0.00 CRN</td>
+					<td id="tier-one-daily-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="tier-one-daily-reward-with-silver-nft">0.00 CRN</td>
+					<td id="tier-one-daily-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Two</td>
+					<td id="tier-two-daily-reward-user-data">0.00 CRN</td>
+					<td id="tier-two-daily-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="tier-two-daily-reward-with-silver-nft">0.00 CRN</td>
+					<td id="tier-two-daily-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Three</td>
+					<td id="tier-three-daily-reward-user-data">0.00 CRN</td>
+					<td id="tier-three-daily-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="tier-three-daily-reward-with-silver-nft">0.00 CRN</td>
+					<td id="tier-three-daily-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Four</td>
+					<td id="tier-four-daily-reward-user-data">0.00 CRN</td>
+					<td id="tier-four-daily-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="tier-four-daily-reward-with-silver-nft">0.00 CRN</td>
+					<td id="tier-four-daily-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td id="total-daily-reward-user-data">0.00 CRN</td>
+					<td id="total-daily-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="total-daily-reward-with-silver-nft">0.00 CRN</td>
+					<td id="total-daily-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<h3>Monthly Rewards</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Tier</th>
+					<th>No NFT</th>
+					<th>Bronze NFT</th>
+					<th>Silver NFT</th>
+					<th>Gold NFT</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>One</td>
+					<td id="tier-one-monthly-reward-user-data">0.00 CRN</td>
+					<td id="tier-one-monthly-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="tier-one-monthly-reward-with-silver-nft">0.00 CRN</td>
+					<td id="tier-one-monthly-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Two</td>
+					<td id="tier-two-monthly-reward-user-data">0.00 CRN</td>
+					<td id="tier-two-monthly-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="tier-two-monthly-reward-with-silver-nft">0.00 CRN</td>
+					<td id="tier-two-monthly-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Three</td>
+					<td id="tier-three-monthly-reward-user-data">0.00 CRN</td>
+					<td id="tier-three-monthly-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="tier-three-monthly-reward-with-silver-nft">0.00 CRN</td>
+					<td id="tier-three-monthly-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Four</td>
+					<td id="tier-four-monthly-reward-user-data">0.00 CRN</td>
+					<td id="tier-four-monthly-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="tier-four-monthly-reward-with-silver-nft">0.00 CRN</td>
+					<td id="tier-four-monthly-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td id="total-monthly-reward-user-data">0.00 CRN</td>
+					<td id="total-monthly-reward-with-bronze-nft">0.00 CRN</td>
+					<td id="total-monthly-reward-with-silver-nft">0.00 CRN</td>
+					<td id="total-monthly-reward-with-gold-nft">0.00 CRN</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<h3>Monthly Fees</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Tier</th>
+					<th>Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>One</td>
+					<td id="tier-one-monthly-fee-user-data">0.00 CRO</td>
+				</tr>
+				<tr>
+					<td>Two</td>
+					<td id="tier-two-monthly-fee-user-data">0.00 CRO</td>
+				</tr>
+				<tr>
+					<td>Three</td>
+					<td id="tier-three-monthly-fee-user-data">0.00 CRO</td>
+				</tr>
+				<tr>
+					<td>Four</td>
+					<td id="tier-four-monthly-fee-user-data">0.00 CRO</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td id="total-monthly-fee-user-data">0.00 CRO</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
