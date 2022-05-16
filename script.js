@@ -87,7 +87,7 @@ const getNodes = _ => {
 
 	}
 
-	monthlyReward.total = applyTax( ( monthlyReward.one + monthlyReward.two + monthlyReward.three + monthlyReward.four ), tax( 30, hasTaxNft ) )
+	monthlyReward.total = applyTax( ( monthlyReward.one + monthlyReward.two + monthlyReward.three + monthlyReward.four ), monthlyTax )
 
 	const monthlyFee = {
 
