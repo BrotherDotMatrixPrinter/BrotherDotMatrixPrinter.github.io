@@ -11,11 +11,6 @@
 <body>
 
 	<div>
-		<label for="user-has-tax-nft">Tax NFT?</label>
-		<input type="checkbox" name="user-has-tax-nft" id="user-has-tax-nft" value="hasTaxNft">
-	</div>
-
-	<div>
 		<p>Node Amounts</p>
 		<table>
 			<thead>
@@ -47,10 +42,14 @@
 				</tr>
 			</tbody>
 		</table>
+		<span>
+			<label for="user-has-tax-nft">Tax NFT?</label>
+			<input type="checkbox" name="user-has-tax-nft" id="user-has-tax-nft" value="hasTaxNft">
+		</span>
 	</div>
 
 	<div>
-		<p>Daily Rewards</p>
+		<p>Daily Rewards (does not include tax)</p>
 		<table>
 			<thead>
 				<tr>
@@ -102,7 +101,7 @@
 	</div>
 
 	<div>
-		<p>Monthly Rewards</p>
+		<p>Monthly Rewards (includes tax</p>
 		<table>
 			<thead>
 				<tr>

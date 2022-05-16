@@ -1,26 +1,4 @@
 /**
- * @param { number? } days Number of days to wait before claiming.
- * @param { boolean? } hasTaxNft Wether or not to to include the tax NFT modifier.
- * @returns { 0.50 | 0.40 | 0.30 | 0.10 | 0.05 } Percentage tax.
- */
-const tax = ( days = 30, hasTaxNft = false ) => {
-
-	if ( days <= 0 || typeof days !== 'number' || typeof hasTaxNft !== 'boolean' )
-		throw new Error( `tax(days: ${days}, hasTaxNft: ${hasTaxNft}): invalid argument` )
-
-	switch ( true ) {
-
-		case days >= 0 && days <= 5: return 0.50
-		case days >= 6 && days <= 10: return 0.40
-		case days >= 11 && days <= 15: return 0.30
-		case days > 15 && ! hasTaxNft: return 0.10
-		case days > 15 && hasTaxNft: return 0.05
-
-	}
-
-}
-
-/**
  * @param { number } value
  * @param { number } tax
  * @returns { number }
@@ -73,8 +51,7 @@ const boostNfts = {
 
 const getNodes = _ => {
 
-	/** @type { boolean } */
-	const hasTaxNft = document.getElementById( 'user-has-tax-nft' ).checked
+	const monthlyTax = document.getElementById( 'user-has-tax-nft' ).checked ? 0.05 : 0.10
 
 	const nodeAmount = {
 
@@ -102,10 +79,10 @@ const getNodes = _ => {
 
 	const monthlyReward = {
 
-		one: applyTax( ( dailyReward.one * 30 ), tax( 30, hasTaxNft ) ),
-		two: applyTax( ( dailyReward.two * 30 ), tax( 30, hasTaxNft) ),
-		three: applyTax( ( dailyReward.three * 30 ), tax( 30, hasTaxNft) ),
-		four: applyTax( ( dailyReward.four * 30 ), tax( 30, hasTaxNft) ),
+		one: applyTax( ( dailyReward.one * 30 ), monthlyTax ),
+		two: applyTax( ( dailyReward.two * 30 ), monthlyTax ),
+		three: applyTax( ( dailyReward.three * 30 ), monthlyTax ),
+		four: applyTax( ( dailyReward.four * 30 ), monthlyTax ),
 		total: 0
 
 	}

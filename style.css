@@ -70,6 +70,9 @@ div, table, tr, td, th {
 }
 
 div {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
 	margin-bottom: 16px;
 	padding: 2px;
 }
