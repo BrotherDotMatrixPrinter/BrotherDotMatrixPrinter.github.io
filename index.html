@@ -10,6 +10,33 @@
 	</head>
 	<body>
 		<div>
+			<h4>Current Prices (approximate)</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>Token</th>
+						<th>USD</th>
+						<th>CRO</th>
+						<th>CRN</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>CRO</td>
+						<td id="cro-current-price-usd">$0.00</td>
+						<td>1.00</td>
+						<td id="cro-current-price-crn">0.00</td>
+					</tr>
+					<tr>
+						<td>CRN</td>
+						<td id="crn-current-price-usd">$0.00</td>
+						<td id="crn-current-price-cro">0.00</td>
+						<td>1.00</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
 			<h4>Node Amounts</h4>
 			<table>
 				<thead>
@@ -94,6 +121,7 @@
 			</table>
 		</div>
 		<div>
+			<h4>Claim Calculator</h4>
 			<span>
 				<label for="user-wait-days">Days:</label>
 				<input type="number" name="user-wait-days" id="user-wait-days" min="0" value="1">
@@ -108,24 +136,34 @@
 					<tr>
 						<th>Boost NFT</th>
 						<th>Amount</th>
+						<th>USD</th>
+						<th>CRO</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>None</td>
 						<td id="user-wait-days-no-nft">0.00 CRN</td>
+						<td id="user-wait-days-no-nft-usd">$0.00</td>
+						<td id="user-wait-days-no-nft-cro">0.00</td>
 					</tr>
 					<tr>
 						<td>Bronze</td>
 						<td id="user-wait-days-bronze-nft">0.00 CRN</td>
+						<td id="user-wait-days-bronze-nft-usd">$0.00</td>
+						<td id="user-wait-days-bronze-nft-cro">0.00</td>
 					</tr>
 					<tr>
 						<td>Silver</td>
 						<td id="user-wait-days-silver-nft">0.00 CRN</td>
+						<td id="user-wait-days-silver-nft-usd">$0.00</td>
+						<td id="user-wait-days-silver-nft-cro">0.00</td>
 					</tr>
 					<tr>
 						<td>Gold</td>
 						<td id="user-wait-days-gold-nft">0.00 CRN</td>
+						<td id="user-wait-days-gold-nft-usd">$0.00</td>
+						<td id="user-wait-days-gold-nft-cro">0.00</td>
 					</tr>
 				</tbody>
 			</table>

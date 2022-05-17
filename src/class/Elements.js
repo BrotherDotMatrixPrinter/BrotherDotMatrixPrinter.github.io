@@ -51,9 +51,17 @@ export default class Elements {
 		waitDays: {
 			tax: new DataNode( 'user-wait-days-tax' ),
 			noNft: new DataNode( 'user-wait-days-no-nft' ),
+			noNftUsd: new DataNode( 'user-wait-days-no-nft-usd' ),
+			noNftCro: new DataNode( 'user-wait-days-no-nft-cro' ),
 			bronzeNft: new DataNode( 'user-wait-days-bronze-nft' ),
+			bronzeNftUsd: new DataNode( 'user-wait-days-bronze-nft-usd' ),
+			bronzeNftCro: new DataNode( 'user-wait-days-bronze-nft-cro' ),
 			silverNft: new DataNode( 'user-wait-days-silver-nft' ),
-			goldNft: new DataNode( 'user-wait-days-gold-nft' )
+			silverNftUsd: new DataNode( 'user-wait-days-silver-nft-usd' ),
+			silverNftCro: new DataNode( 'user-wait-days-silver-nft-cro' ),
+			goldNft: new DataNode( 'user-wait-days-gold-nft' ),
+			goldNftUsd: new DataNode( 'user-wait-days-gold-nft-usd' ),
+			goldNftCro: new DataNode( 'user-wait-days-gold-nft-cro' )
 		},
 
 		monthlyFees: {
@@ -62,6 +70,13 @@ export default class Elements {
 			tierThree: new DataNode( 'tier-three-monthly-fee-user-data' ),
 			tierFour: new DataNode( 'tier-four-monthly-fee-user-data' ),
 			total: new DataNode( 'total-monthly-fee-user-data' )
+		},
+
+		prices: {
+			croUsd: new DataNode( 'cro-current-price-usd' ),
+			croCrn: new DataNode( 'cro-current-price-crn' ),
+			crnUsd: new DataNode( 'crn-current-price-usd' ),
+			crnCro: new DataNode( 'crn-current-price-cro' )
 		}
 	}
 

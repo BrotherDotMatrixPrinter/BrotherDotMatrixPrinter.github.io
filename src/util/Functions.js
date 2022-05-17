@@ -1,6 +1,8 @@
+import axios from 'axios'
 import Elements from '../class/Elements.js'
 import NodeTiers from '../class/NodeTiers.js'
 import BoostNfts from '../class/BoostNfts.js'
+import Constants from './Constants.js'
 
 /**
  * @typedef { Object } NodeAmounts
@@ -16,6 +18,14 @@ import BoostNfts from '../class/BoostNfts.js'
  * @property { number } waitDays
  * @property { boolean } hasTaxNft
  * @property { NodeAmounts } nodeAmounts
+ */
+
+/**
+ * @typedef { Object } PriceData
+ * @property { number } croUsd
+ * @property { number } croCrn
+ * @property { number } crnUsd
+ * @property { number } crnCro
  */
 
 /** @returns { UserInputs } */
@@ -136,20 +146,15 @@ export const applyBoost = ( value, boost ) => value + ( value * boost )
  * @param { NodeAmounts } dailyReward
  * @param { NodeAmounts } monthlyFees
  * @param { number } dailyWaitTotal
+ * @param { PriceData } priceData
  */
-export const updateDisplay = ( nodeAmounts, dailyReward, monthlyFees, dailyWaitTotal ) => {
+export const updateDisplay = ( nodeAmounts, dailyReward, monthlyFees, dailyWaitTotal, priceData ) => {
 	let element = Elements.data.total
 	element.nodeAmount.get().innerHTML = `${ nodeAmounts.total.toFixed( 0 ) } Nodes`
 	element.noNft.get().innerHTML = `${ dailyReward.total.toFixed( 2 ) } CRN`
 	element.bronzeNft.get().innerHTML = `${ applyBoost( dailyReward.total, BoostNfts.bronze ).toFixed( 2 ) } CRN`
 	element.silverNft.get().innerHTML = `${ applyBoost( dailyReward.total, BoostNfts.silver ).toFixed( 2 ) } CRN`
 	element.goldNft.get().innerHTML = `${ applyBoost( dailyReward.total, BoostNfts.gold ).toFixed( 2 ) } CRN`
-
-	element = Elements.data.waitDays
-	element.noNft.get().innerHTML = `${ dailyWaitTotal.toFixed( 2 ) } CRN`
-	element.bronzeNft.get().innerHTML = `${ applyBoost( dailyWaitTotal, BoostNfts.bronze ).toFixed( 2 ) } CRN`
-	element.silverNft.get().innerHTML = `${ applyBoost( dailyWaitTotal, BoostNfts.silver ).toFixed( 2 ) } CRN`
-	element.goldNft.get().innerHTML = `${ applyBoost( dailyWaitTotal, BoostNfts.gold ).toFixed( 2 ) } CRN`
 
 	element = Elements.data.tierOne
 	element.noNft.get().innerHTML = `${ dailyReward.tierOne.toFixed( 2 ) } CRN`
@@ -175,10 +180,44 @@ export const updateDisplay = ( nodeAmounts, dailyReward, monthlyFees, dailyWaitT
 	element.silverNft.get().innerHTML = `${ applyBoost( dailyReward.tierFour, BoostNfts.silver ).toFixed( 2 ) } CRN`
 	element.goldNft.get().innerHTML = `${ applyBoost( dailyReward.tierFour, BoostNfts.gold ).toFixed( 2 ) } CRN`
 
+	const waitDaysElement = Elements.data.waitDays
+	waitDaysElement.noNft.get().innerHTML = `${ dailyWaitTotal.toFixed( 2 ) } CRN`
+	waitDaysElement.noNftUsd.get().innerHTML = `$${ ( dailyWaitTotal * priceData.crnUsd ).toFixed( 2 ) }`
+	waitDaysElement.noNftCro.get().innerHTML = `${ ( dailyWaitTotal * priceData.crnCro ).toFixed( 2 ) }`
+	waitDaysElement.bronzeNft.get().innerHTML = `${ applyBoost( dailyWaitTotal, BoostNfts.bronze ).toFixed( 2 ) } CRN`
+	waitDaysElement.bronzeNftUsd.get().innerHTML = `$${ ( applyBoost( dailyWaitTotal, BoostNfts.bronze ) * priceData.crnUsd ).toFixed( 2 ) }`
+	waitDaysElement.bronzeNftCro.get().innerHTML = `${ ( applyBoost( dailyWaitTotal, BoostNfts.bronze ) * priceData.crnCro ).toFixed( 2 ) }`
+	waitDaysElement.silverNft.get().innerHTML = `${ applyBoost( dailyWaitTotal, BoostNfts.silver ).toFixed( 2 ) } CRN`
+	waitDaysElement.silverNftUsd.get().innerHTML = `$${ ( applyBoost( dailyWaitTotal, BoostNfts.silver ) * priceData.crnUsd ).toFixed( 2 ) }`
+	waitDaysElement.silverNftCro.get().innerHTML = `${ ( applyBoost( dailyWaitTotal, BoostNfts.silver ) * priceData.crnCro ).toFixed( 2 ) }`
+	waitDaysElement.goldNft.get().innerHTML = `${ applyBoost( dailyWaitTotal, BoostNfts.gold ).toFixed( 2 ) } CRN`
+	waitDaysElement.goldNftUsd.get().innerHTML = `$${ ( applyBoost( dailyWaitTotal, BoostNfts.gold ) * priceData.crnUsd ).toFixed( 2 ) }`
+	waitDaysElement.goldNftCro.get().innerHTML = `${ ( applyBoost( dailyWaitTotal, BoostNfts.gold ) * priceData.crnCro ).toFixed( 2 ) }`
+
 	const monthlyFeeElement = Elements.data.monthlyFees
 	monthlyFeeElement.tierOne.get().innerHTML = `${ monthlyFees.tierOne.toFixed( 2 ) } CRO`
 	monthlyFeeElement.tierTwo.get().innerHTML = `${ monthlyFees.tierTwo.toFixed( 2 ) } CRO`
 	monthlyFeeElement.tierThree.get().innerHTML = `${ monthlyFees.tierThree.toFixed( 2 ) } CRO`
 	monthlyFeeElement.tierFour.get().innerHTML = `${ monthlyFees.tierFour.toFixed( 2 ) } CRO`
 	monthlyFeeElement.total.get().innerHTML = `${ monthlyFees.total.toFixed( 2 ) } CRO`
+}
+
+/** @returns { Promise< PriceData > } */
+export const getPrices = async () => {
+	const /** @type { number } */ croUsd = ( await axios.get( Constants.croUsdCGUrl ) ).data[ 'crypto-com-chain' ][ 'usd' ],
+		/** @type { number } */ crnUsd = ( await axios.get( Constants.crnUsdCGUrl ) ).data[ 'cronodes' ][ 'usd' ],
+		croCrn = croUsd / crnUsd,
+		crnCro = crnUsd / croUsd
+
+	Elements.data.prices.croUsd.get().innerHTML = `$${ croUsd.toFixed( 2 ) }`
+	Elements.data.prices.croCrn.get().innerHTML = croCrn.toFixed( 2 )
+	Elements.data.prices.crnUsd.get().innerHTML = crnUsd.toFixed( 2 )
+	Elements.data.prices.crnCro.get().innerHTML = crnCro.toFixed( 2 )
+
+	return {
+		croUsd,
+		croCrn,
+		crnUsd,
+		crnCro
+	}
 }
