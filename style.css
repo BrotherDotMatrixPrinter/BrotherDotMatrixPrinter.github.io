@@ -1,3 +1,7 @@
+html {
+	width: 100vw;
+}
+
 html, body, div, span, h4, label, table, tbody, thead, tr, th, td {
 	margin: 0;
 	padding: 0;
@@ -5,7 +9,11 @@ html, body, div, span, h4, label, table, tbody, thead, tr, th, td {
 }
 
 html {
-	background-color: #F2EFEA;
+	background-color: black;
+}
+
+body, div, h4, table, thead, tbody, tr {
+	width: 100%;
 }
 
 body, div {
@@ -17,11 +25,10 @@ body, div {
 body {
 	line-height: 1;
 	padding-top: 16px;
-	width: 100vw;
 }
 
 div, table, tr, td, th {
-	border: 1px solid black;
+	border: 1px solid white;
 }
 
 div {
@@ -30,12 +37,14 @@ div {
 	width: 97.5%;
 }
 
-h4, table, thead, tbody, tr {
-	width: 100%;
-}
+
 
 h4, td, th, input {
 	text-align: center;
+}
+
+h4, td, th, label {
+	color: white;
 }
 
 h4 {

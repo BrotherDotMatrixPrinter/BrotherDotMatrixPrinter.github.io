@@ -1,0 +1,22 @@
+{
+  "name": "crn-calc",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/script.js",
+  "scripts": {
+    "build": "babel src --out-dir lib && browserify lib/script.js -o build/script.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.12",
+    "@babel/preset-env": "^7.17.12",
+    "browserify": "^17.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
