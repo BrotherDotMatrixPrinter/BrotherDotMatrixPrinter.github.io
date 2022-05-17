@@ -34,7 +34,7 @@ const tiers = {
 
 		crnCostPerNode: 20.00,
 		crnRewardPerDay: 0.18,
-		monthlyCROFee: 10.00
+		monthlyCROFee: 8.00
 
 	},
 	three: {
