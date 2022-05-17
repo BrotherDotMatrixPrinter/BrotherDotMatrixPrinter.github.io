@@ -5,6 +5,8 @@ export default class DataNode {
 
 	get() { return document.getElementById( this.#id ) }
 
+	set( data ) { document.getElementById( this.#id ).innerHTML = data }
+
 	/**
 	 * @param { string } id
 	 */

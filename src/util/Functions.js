@@ -149,57 +149,75 @@ export const applyBoost = ( value, boost ) => value + ( value * boost )
  * @param { PriceData } priceData
  */
 export const updateDisplay = ( nodeAmounts, dailyReward, monthlyFees, dailyWaitTotal, priceData ) => {
-	let element = Elements.data.total
-	element.nodeAmount.get().innerHTML = `${ nodeAmounts.total.toFixed( 0 ) } Nodes`
-	element.noNft.get().innerHTML = `${ dailyReward.total.toFixed( 2 ) } CRN`
-	element.bronzeNft.get().innerHTML = `${ applyBoost( dailyReward.total, BoostNfts.bronze ).toFixed( 2 ) } CRN`
-	element.silverNft.get().innerHTML = `${ applyBoost( dailyReward.total, BoostNfts.silver ).toFixed( 2 ) } CRN`
-	element.goldNft.get().innerHTML = `${ applyBoost( dailyReward.total, BoostNfts.gold ).toFixed( 2 ) } CRN`
-
-	element = Elements.data.tierOne
-	element.noNft.get().innerHTML = `${ dailyReward.tierOne.toFixed( 2 ) } CRN`
-	element.bronzeNft.get().innerHTML = `${ applyBoost( dailyReward.tierOne, BoostNfts.bronze ).toFixed( 2 ) } CRN`
-	element.silverNft.get().innerHTML = `${ applyBoost( dailyReward.tierOne, BoostNfts.silver ).toFixed( 2 ) } CRN`
-	element.goldNft.get().innerHTML = `${ applyBoost( dailyReward.tierOne, BoostNfts.gold ).toFixed( 2 ) } CRN`
+	let element = Elements.data.tierOne
+	element.noNft.set( `${ dailyReward.tierOne.toFixed( 2 ) } CRN` )
+	element.bronzeNft.set( `${ applyBoost( dailyReward.tierOne, BoostNfts.bronze ).toFixed( 2 ) } CRN` )
+	element.silverNft.set( `${ applyBoost( dailyReward.tierOne, BoostNfts.silver ).toFixed( 2 ) } CRN` )
+	element.goldNft.set( `${ applyBoost( dailyReward.tierOne, BoostNfts.gold ).toFixed( 2 ) } CRN` )
 
 	element = Elements.data.tierTwo
-	element.noNft.get().innerHTML = `${ dailyReward.tierTwo.toFixed( 2 ) } CRN`
-	element.bronzeNft.get().innerHTML = `${ applyBoost( dailyReward.tierTwo, BoostNfts.bronze ).toFixed( 2 ) } CRN`
-	element.silverNft.get().innerHTML = `${ applyBoost( dailyReward.tierTwo, BoostNfts.silver ).toFixed( 2 ) } CRN`
-	element.goldNft.get().innerHTML = `${ applyBoost( dailyReward.tierTwo, BoostNfts.gold ).toFixed( 2 ) } CRN`
+	element.noNft.set( `${ dailyReward.tierTwo.toFixed( 2 ) } CRN` )
+	element.bronzeNft.set( `${ applyBoost( dailyReward.tierTwo, BoostNfts.bronze ).toFixed( 2 ) } CRN` )
+	element.silverNft.set( `${ applyBoost( dailyReward.tierTwo, BoostNfts.silver ).toFixed( 2 ) } CRN` )
+	element.goldNft.set( `${ applyBoost( dailyReward.tierTwo, BoostNfts.gold ).toFixed( 2 ) } CRN` )
 
 	element = Elements.data.tierThree
-	element.noNft.get().innerHTML = `${ dailyReward.tierThree.toFixed( 2 ) } CRN`
-	element.bronzeNft.get().innerHTML = `${ applyBoost( dailyReward.tierThree, BoostNfts.bronze ).toFixed( 2 ) } CRN`
-	element.silverNft.get().innerHTML = `${ applyBoost( dailyReward.tierThree, BoostNfts.silver ).toFixed( 2 ) } CRN`
-	element.goldNft.get().innerHTML = `${ applyBoost( dailyReward.tierThree, BoostNfts.gold ).toFixed( 2 ) } CRN`
+	element.noNft.set( `${ dailyReward.tierThree.toFixed( 2 ) } CRN` )
+	element.bronzeNft.set( `${ applyBoost( dailyReward.tierThree, BoostNfts.bronze ).toFixed( 2 ) } CRN` )
+	element.silverNft.set( `${ applyBoost( dailyReward.tierThree, BoostNfts.silver ).toFixed( 2 ) } CRN` )
+	element.goldNft.set( `${ applyBoost( dailyReward.tierThree, BoostNfts.gold ).toFixed( 2 ) } CRN` )
 
 	element = Elements.data.tierFour
-	element.noNft.get().innerHTML = `${ dailyReward.tierFour.toFixed( 2 ) } CRN`
-	element.bronzeNft.get().innerHTML = `${ applyBoost( dailyReward.tierFour, BoostNfts.bronze ).toFixed( 2 ) } CRN`
-	element.silverNft.get().innerHTML = `${ applyBoost( dailyReward.tierFour, BoostNfts.silver ).toFixed( 2 ) } CRN`
-	element.goldNft.get().innerHTML = `${ applyBoost( dailyReward.tierFour, BoostNfts.gold ).toFixed( 2 ) } CRN`
+	element.noNft.set( `${ dailyReward.tierFour.toFixed( 2 ) } CRN` )
+	element.bronzeNft.set( `${ applyBoost( dailyReward.tierFour, BoostNfts.bronze ).toFixed( 2 ) } CRN` )
+	element.silverNft.set( `${ applyBoost( dailyReward.tierFour, BoostNfts.silver ).toFixed( 2 ) } CRN` )
+	element.goldNft.set( `${ applyBoost( dailyReward.tierFour, BoostNfts.gold ).toFixed( 2 ) } CRN` )
+
+	const totalElement = Elements.data.total
+	totalElement.nodeAmount.set( `${ nodeAmounts.total.toFixed( 0 ) } Nodes` )
+	totalElement.noNft.set( `${ dailyReward.total.toFixed( 2 ) } CRN` )
+	totalElement.noNftUsd.set( `$${ ( dailyReward.total * priceData.crnUsd ).toFixed( 2 ) }` )
+	totalElement.noNftCro.set( ( dailyReward.total * priceData.crnCro ).toFixed( 2 ) )
+	totalElement.bronzeNft.set( `${ applyBoost( dailyReward.total, BoostNfts.bronze ).toFixed( 2 ) } CRN` )
+	totalElement.bronzeNftUsd.set( `$${ ( applyBoost( dailyReward.total, BoostNfts.bronze ) * priceData.crnUsd ).toFixed( 2 ) }` )
+	totalElement.bronzeNftCro.set( ( applyBoost( dailyReward.total, BoostNfts.bronze ) * priceData.crnCro ).toFixed( 2 ) )
+	totalElement.silverNft.set( `${ applyBoost( dailyReward.total, BoostNfts.silver ).toFixed( 2 ) } CRN` )
+	totalElement.silverNftUsd.set( `$${ ( applyBoost( dailyReward.total, BoostNfts.silver ) * priceData.crnUsd ).toFixed( 2 ) }` )
+	totalElement.silverNftCro.set( ( applyBoost( dailyReward.total, BoostNfts.silver ) * priceData.crnCro ).toFixed( 2 ) )
+	totalElement.goldNft.set( `${ applyBoost( dailyReward.total, BoostNfts.gold ).toFixed( 2 ) } CRN` )
+	totalElement.goldNftUsd.set( `$${ ( applyBoost( dailyReward.total, BoostNfts.gold ) * priceData.crnUsd ).toFixed( 2 ) }` )
+	totalElement.goldNftCro.set( ( applyBoost( dailyReward.total, BoostNfts.gold ) * priceData.crnCro ).toFixed( 2 ) )
 
 	const waitDaysElement = Elements.data.waitDays
-	waitDaysElement.noNft.get().innerHTML = `${ dailyWaitTotal.toFixed( 2 ) } CRN`
-	waitDaysElement.noNftUsd.get().innerHTML = `$${ ( dailyWaitTotal * priceData.crnUsd ).toFixed( 2 ) }`
-	waitDaysElement.noNftCro.get().innerHTML = `${ ( dailyWaitTotal * priceData.crnCro ).toFixed( 2 ) }`
-	waitDaysElement.bronzeNft.get().innerHTML = `${ applyBoost( dailyWaitTotal, BoostNfts.bronze ).toFixed( 2 ) } CRN`
-	waitDaysElement.bronzeNftUsd.get().innerHTML = `$${ ( applyBoost( dailyWaitTotal, BoostNfts.bronze ) * priceData.crnUsd ).toFixed( 2 ) }`
-	waitDaysElement.bronzeNftCro.get().innerHTML = `${ ( applyBoost( dailyWaitTotal, BoostNfts.bronze ) * priceData.crnCro ).toFixed( 2 ) }`
-	waitDaysElement.silverNft.get().innerHTML = `${ applyBoost( dailyWaitTotal, BoostNfts.silver ).toFixed( 2 ) } CRN`
-	waitDaysElement.silverNftUsd.get().innerHTML = `$${ ( applyBoost( dailyWaitTotal, BoostNfts.silver ) * priceData.crnUsd ).toFixed( 2 ) }`
-	waitDaysElement.silverNftCro.get().innerHTML = `${ ( applyBoost( dailyWaitTotal, BoostNfts.silver ) * priceData.crnCro ).toFixed( 2 ) }`
-	waitDaysElement.goldNft.get().innerHTML = `${ applyBoost( dailyWaitTotal, BoostNfts.gold ).toFixed( 2 ) } CRN`
-	waitDaysElement.goldNftUsd.get().innerHTML = `$${ ( applyBoost( dailyWaitTotal, BoostNfts.gold ) * priceData.crnUsd ).toFixed( 2 ) }`
-	waitDaysElement.goldNftCro.get().innerHTML = `${ ( applyBoost( dailyWaitTotal, BoostNfts.gold ) * priceData.crnCro ).toFixed( 2 ) }`
+	waitDaysElement.noNft.set( `${ dailyWaitTotal.toFixed( 2 ) } CRN` )
+	waitDaysElement.noNftUsd.set( `$${ ( dailyWaitTotal * priceData.crnUsd ).toFixed( 2 ) }` )
+	waitDaysElement.noNftCro.set( ( dailyWaitTotal * priceData.crnCro ).toFixed( 2 ) )
+	waitDaysElement.bronzeNft.set( `${ applyBoost( dailyWaitTotal, BoostNfts.bronze ).toFixed( 2 ) } CRN` )
+	waitDaysElement.bronzeNftUsd.set( `$${ ( applyBoost( dailyWaitTotal, BoostNfts.bronze ) * priceData.crnUsd ).toFixed( 2 ) }` )
+	waitDaysElement.bronzeNftCro.set( ( applyBoost( dailyWaitTotal, BoostNfts.bronze ) * priceData.crnCro ).toFixed( 2 ) )
+	waitDaysElement.silverNft.set( `${ applyBoost( dailyWaitTotal, BoostNfts.silver ).toFixed( 2 ) } CRN` )
+	waitDaysElement.silverNftUsd.set( `$${ ( applyBoost( dailyWaitTotal, BoostNfts.silver ) * priceData.crnUsd ).toFixed( 2 ) }` )
+	waitDaysElement.silverNftCro.set( ( applyBoost( dailyWaitTotal, BoostNfts.silver ) * priceData.crnCro ).toFixed( 2 ) )
+	waitDaysElement.goldNft.set( `${ applyBoost( dailyWaitTotal, BoostNfts.gold ).toFixed( 2 ) } CRN` )
+	waitDaysElement.goldNftUsd.set( `$${ ( applyBoost( dailyWaitTotal, BoostNfts.gold ) * priceData.crnUsd ).toFixed( 2 ) }` )
+	waitDaysElement.goldNftCro.set( ( applyBoost( dailyWaitTotal, BoostNfts.gold ) * priceData.crnCro ).toFixed( 2 ) )
 
 	const monthlyFeeElement = Elements.data.monthlyFees
-	monthlyFeeElement.tierOne.get().innerHTML = `${ monthlyFees.tierOne.toFixed( 2 ) } CRO`
-	monthlyFeeElement.tierTwo.get().innerHTML = `${ monthlyFees.tierTwo.toFixed( 2 ) } CRO`
-	monthlyFeeElement.tierThree.get().innerHTML = `${ monthlyFees.tierThree.toFixed( 2 ) } CRO`
-	monthlyFeeElement.tierFour.get().innerHTML = `${ monthlyFees.tierFour.toFixed( 2 ) } CRO`
-	monthlyFeeElement.total.get().innerHTML = `${ monthlyFees.total.toFixed( 2 ) } CRO`
+	monthlyFeeElement.tierOne.set( monthlyFees.tierOne.toFixed( 2 ) )
+	monthlyFeeElement.tierOneUsd.set( `$${ ( monthlyFees.tierOne * priceData.croUsd ).toFixed( 2 ) }` )
+	monthlyFeeElement.tierOneCrn.set( ( monthlyFees.tierOne * priceData.croCrn ).toFixed( 2 ) )
+	monthlyFeeElement.tierTwo.set( monthlyFees.tierTwo.toFixed( 2 ) )
+	monthlyFeeElement.tierTwoUsd.set( `$${ ( monthlyFees.tierTwo * priceData.croUsd ).toFixed( 2 ) }` )
+	monthlyFeeElement.tierTwoCrn.set( ( monthlyFees.tierTwo * priceData.croCrn ).toFixed( 2 ) )
+	monthlyFeeElement.tierThree.set( monthlyFees.tierThree.toFixed( 2 ) )
+	monthlyFeeElement.tierThreeUsd.set( `${ ( monthlyFees.tierThree * priceData.croUsd ).toFixed( 2 ) }` )
+	monthlyFeeElement.tierThreeCrn.set( ( monthlyFees.tierThree * priceData.croCrn ).toFixed( 2 ) )
+	monthlyFeeElement.tierFour.set( monthlyFees.tierFour.toFixed( 2 ) )
+	monthlyFeeElement.tierFourUsd.set( `$${ ( monthlyFees.tierFour * priceData.croUsd ).toFixed( 2 ) }` )
+	monthlyFeeElement.tierFourCrn.set( ( monthlyFees.tierFour * priceData.croCrn ).toFixed( 2 ) )
+	monthlyFeeElement.total.set( monthlyFees.total.toFixed( 2 ) )
+	monthlyFeeElement.totalUsd.set( `$${ ( monthlyFees.total * priceData.croUsd ).toFixed( 2 ) }` )
+	monthlyFeeElement.totalCrn.set( ( monthlyFees.total * priceData.croCrn ).toFixed( 2 ) )
 }
 
 /** @returns { Promise< PriceData > } */
@@ -209,10 +227,10 @@ export const getPrices = async () => {
 		croCrn = croUsd / crnUsd,
 		crnCro = crnUsd / croUsd
 
-	Elements.data.prices.croUsd.get().innerHTML = `$${ croUsd.toFixed( 2 ) }`
-	Elements.data.prices.croCrn.get().innerHTML = croCrn.toFixed( 2 )
-	Elements.data.prices.crnUsd.get().innerHTML = crnUsd.toFixed( 2 )
-	Elements.data.prices.crnCro.get().innerHTML = crnCro.toFixed( 2 )
+	Elements.data.prices.croUsd.set( `$${ croUsd.toFixed( 2 ) }` )
+	Elements.data.prices.croCrn.set( croCrn.toFixed( 2 ) )
+	Elements.data.prices.crnUsd.set( crnUsd.toFixed( 2 ) )
+	Elements.data.prices.crnCro.set( crnCro.toFixed( 2 ) )
 
 	return {
 		croUsd,

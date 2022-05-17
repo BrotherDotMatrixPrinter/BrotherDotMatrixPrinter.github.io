@@ -48,6 +48,10 @@ class DataNode {
   get() {
     return document.getElementById(_classPrivateFieldGet(this, _id));
   }
+
+  set(data) {
+    document.getElementById(_classPrivateFieldGet(this, _id)).innerHTML = data;
+  }
   /**
    * @param { string } id
    */
@@ -120,9 +124,17 @@ _defineProperty(Elements, "data", {
   total: {
     nodeAmount: new _DataNode.default('total-node-amount-user-data'),
     noNft: new _DataNode.default('total-daily-reward-user-data'),
+    noNftUsd: new _DataNode.default('total-daily-reward-user-data-usd'),
+    noNftCro: new _DataNode.default('total-daily-reward-user-data-cro'),
     bronzeNft: new _DataNode.default('total-daily-reward-with-bronze-nft'),
+    bronzeNftUsd: new _DataNode.default('total-daily-reward-with-bronze-nft-usd'),
+    bronzeNftCro: new _DataNode.default('total-daily-reward-with-bronze-nft-cro'),
     silverNft: new _DataNode.default('total-daily-reward-with-silver-nft'),
-    goldNft: new _DataNode.default('total-daily-reward-with-gold-nft')
+    silverNftUsd: new _DataNode.default('total-daily-reward-with-silver-nft-usd'),
+    silverNftCro: new _DataNode.default('total-daily-reward-with-silver-nft-cro'),
+    goldNft: new _DataNode.default('total-daily-reward-with-gold-nft'),
+    goldNftUsd: new _DataNode.default('total-daily-reward-with-gold-nft-usd'),
+    goldNftCro: new _DataNode.default('total-daily-reward-with-gold-nft-cro')
   },
   waitDays: {
     tax: new _DataNode.default('user-wait-days-tax'),
@@ -141,10 +153,20 @@ _defineProperty(Elements, "data", {
   },
   monthlyFees: {
     tierOne: new _DataNode.default('tier-one-monthly-fee-user-data'),
+    tierOneUsd: new _DataNode.default('tier-one-monthly-fee-user-data-usd'),
+    tierOneCrn: new _DataNode.default('tier-one-monthly-fee-user-data-crn'),
     tierTwo: new _DataNode.default('tier-two-monthly-fee-user-data'),
+    tierTwoUsd: new _DataNode.default('tier-two-monthly-fee-user-data-usd'),
+    tierTwoCrn: new _DataNode.default('tier-two-monthly-fee-user-data-crn'),
     tierThree: new _DataNode.default('tier-three-monthly-fee-user-data'),
+    tierThreeUsd: new _DataNode.default('tier-three-monthly-fee-user-data-usd'),
+    tierThreeCrn: new _DataNode.default('tier-three-monthly-fee-user-data-crn'),
     tierFour: new _DataNode.default('tier-four-monthly-fee-user-data'),
-    total: new _DataNode.default('total-monthly-fee-user-data')
+    tierFourUsd: new _DataNode.default('tier-four-monthly-fee-user-data-usd'),
+    tierFourCrn: new _DataNode.default('tier-four-monthly-fee-user-data-crn'),
+    total: new _DataNode.default('total-monthly-fee-user-data'),
+    totalUsd: new _DataNode.default('total-monthly-fee-user-data-usd'),
+    totalCrn: new _DataNode.default('total-monthly-fee-user-data-crn')
   },
   prices: {
     croUsd: new _DataNode.default('cro-current-price-usd'),
@@ -448,51 +470,69 @@ const applyBoost = (value, boost) => value + value * boost;
 exports.applyBoost = applyBoost;
 
 const updateDisplay = (nodeAmounts, dailyReward, monthlyFees, dailyWaitTotal, priceData) => {
-  let element = _Elements.default.data.total;
-  element.nodeAmount.get().innerHTML = "".concat(nodeAmounts.total.toFixed(0), " Nodes");
-  element.noNft.get().innerHTML = "".concat(dailyReward.total.toFixed(2), " CRN");
-  element.bronzeNft.get().innerHTML = "".concat(applyBoost(dailyReward.total, _BoostNfts.default.bronze).toFixed(2), " CRN");
-  element.silverNft.get().innerHTML = "".concat(applyBoost(dailyReward.total, _BoostNfts.default.silver).toFixed(2), " CRN");
-  element.goldNft.get().innerHTML = "".concat(applyBoost(dailyReward.total, _BoostNfts.default.gold).toFixed(2), " CRN");
-  element = _Elements.default.data.tierOne;
-  element.noNft.get().innerHTML = "".concat(dailyReward.tierOne.toFixed(2), " CRN");
-  element.bronzeNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierOne, _BoostNfts.default.bronze).toFixed(2), " CRN");
-  element.silverNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierOne, _BoostNfts.default.silver).toFixed(2), " CRN");
-  element.goldNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierOne, _BoostNfts.default.gold).toFixed(2), " CRN");
+  let element = _Elements.default.data.tierOne;
+  element.noNft.set("".concat(dailyReward.tierOne.toFixed(2), " CRN"));
+  element.bronzeNft.set("".concat(applyBoost(dailyReward.tierOne, _BoostNfts.default.bronze).toFixed(2), " CRN"));
+  element.silverNft.set("".concat(applyBoost(dailyReward.tierOne, _BoostNfts.default.silver).toFixed(2), " CRN"));
+  element.goldNft.set("".concat(applyBoost(dailyReward.tierOne, _BoostNfts.default.gold).toFixed(2), " CRN"));
   element = _Elements.default.data.tierTwo;
-  element.noNft.get().innerHTML = "".concat(dailyReward.tierTwo.toFixed(2), " CRN");
-  element.bronzeNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierTwo, _BoostNfts.default.bronze).toFixed(2), " CRN");
-  element.silverNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierTwo, _BoostNfts.default.silver).toFixed(2), " CRN");
-  element.goldNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierTwo, _BoostNfts.default.gold).toFixed(2), " CRN");
+  element.noNft.set("".concat(dailyReward.tierTwo.toFixed(2), " CRN"));
+  element.bronzeNft.set("".concat(applyBoost(dailyReward.tierTwo, _BoostNfts.default.bronze).toFixed(2), " CRN"));
+  element.silverNft.set("".concat(applyBoost(dailyReward.tierTwo, _BoostNfts.default.silver).toFixed(2), " CRN"));
+  element.goldNft.set("".concat(applyBoost(dailyReward.tierTwo, _BoostNfts.default.gold).toFixed(2), " CRN"));
   element = _Elements.default.data.tierThree;
-  element.noNft.get().innerHTML = "".concat(dailyReward.tierThree.toFixed(2), " CRN");
-  element.bronzeNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierThree, _BoostNfts.default.bronze).toFixed(2), " CRN");
-  element.silverNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierThree, _BoostNfts.default.silver).toFixed(2), " CRN");
-  element.goldNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierThree, _BoostNfts.default.gold).toFixed(2), " CRN");
+  element.noNft.set("".concat(dailyReward.tierThree.toFixed(2), " CRN"));
+  element.bronzeNft.set("".concat(applyBoost(dailyReward.tierThree, _BoostNfts.default.bronze).toFixed(2), " CRN"));
+  element.silverNft.set("".concat(applyBoost(dailyReward.tierThree, _BoostNfts.default.silver).toFixed(2), " CRN"));
+  element.goldNft.set("".concat(applyBoost(dailyReward.tierThree, _BoostNfts.default.gold).toFixed(2), " CRN"));
   element = _Elements.default.data.tierFour;
-  element.noNft.get().innerHTML = "".concat(dailyReward.tierFour.toFixed(2), " CRN");
-  element.bronzeNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierFour, _BoostNfts.default.bronze).toFixed(2), " CRN");
-  element.silverNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierFour, _BoostNfts.default.silver).toFixed(2), " CRN");
-  element.goldNft.get().innerHTML = "".concat(applyBoost(dailyReward.tierFour, _BoostNfts.default.gold).toFixed(2), " CRN");
+  element.noNft.set("".concat(dailyReward.tierFour.toFixed(2), " CRN"));
+  element.bronzeNft.set("".concat(applyBoost(dailyReward.tierFour, _BoostNfts.default.bronze).toFixed(2), " CRN"));
+  element.silverNft.set("".concat(applyBoost(dailyReward.tierFour, _BoostNfts.default.silver).toFixed(2), " CRN"));
+  element.goldNft.set("".concat(applyBoost(dailyReward.tierFour, _BoostNfts.default.gold).toFixed(2), " CRN"));
+  const totalElement = _Elements.default.data.total;
+  totalElement.nodeAmount.set("".concat(nodeAmounts.total.toFixed(0), " Nodes"));
+  totalElement.noNft.set("".concat(dailyReward.total.toFixed(2), " CRN"));
+  totalElement.noNftUsd.set("$".concat((dailyReward.total * priceData.crnUsd).toFixed(2)));
+  totalElement.noNftCro.set((dailyReward.total * priceData.crnCro).toFixed(2));
+  totalElement.bronzeNft.set("".concat(applyBoost(dailyReward.total, _BoostNfts.default.bronze).toFixed(2), " CRN"));
+  totalElement.bronzeNftUsd.set("$".concat((applyBoost(dailyReward.total, _BoostNfts.default.bronze) * priceData.crnUsd).toFixed(2)));
+  totalElement.bronzeNftCro.set((applyBoost(dailyReward.total, _BoostNfts.default.bronze) * priceData.crnCro).toFixed(2));
+  totalElement.silverNft.set("".concat(applyBoost(dailyReward.total, _BoostNfts.default.silver).toFixed(2), " CRN"));
+  totalElement.silverNftUsd.set("$".concat((applyBoost(dailyReward.total, _BoostNfts.default.silver) * priceData.crnUsd).toFixed(2)));
+  totalElement.silverNftCro.set((applyBoost(dailyReward.total, _BoostNfts.default.silver) * priceData.crnCro).toFixed(2));
+  totalElement.goldNft.set("".concat(applyBoost(dailyReward.total, _BoostNfts.default.gold).toFixed(2), " CRN"));
+  totalElement.goldNftUsd.set("$".concat((applyBoost(dailyReward.total, _BoostNfts.default.gold) * priceData.crnUsd).toFixed(2)));
+  totalElement.goldNftCro.set((applyBoost(dailyReward.total, _BoostNfts.default.gold) * priceData.crnCro).toFixed(2));
   const waitDaysElement = _Elements.default.data.waitDays;
-  waitDaysElement.noNft.get().innerHTML = "".concat(dailyWaitTotal.toFixed(2), " CRN");
-  waitDaysElement.noNftUsd.get().innerHTML = "$".concat((dailyWaitTotal * priceData.crnUsd).toFixed(2));
-  waitDaysElement.noNftCro.get().innerHTML = "".concat((dailyWaitTotal * priceData.crnCro).toFixed(2));
-  waitDaysElement.bronzeNft.get().innerHTML = "".concat(applyBoost(dailyWaitTotal, _BoostNfts.default.bronze).toFixed(2), " CRN");
-  waitDaysElement.bronzeNftUsd.get().innerHTML = "$".concat((applyBoost(dailyWaitTotal, _BoostNfts.default.bronze) * priceData.crnUsd).toFixed(2));
-  waitDaysElement.bronzeNftCro.get().innerHTML = "".concat((applyBoost(dailyWaitTotal, _BoostNfts.default.bronze) * priceData.crnCro).toFixed(2));
-  waitDaysElement.silverNft.get().innerHTML = "".concat(applyBoost(dailyWaitTotal, _BoostNfts.default.silver).toFixed(2), " CRN");
-  waitDaysElement.silverNftUsd.get().innerHTML = "$".concat((applyBoost(dailyWaitTotal, _BoostNfts.default.silver) * priceData.crnUsd).toFixed(2));
-  waitDaysElement.silverNftCro.get().innerHTML = "".concat((applyBoost(dailyWaitTotal, _BoostNfts.default.silver) * priceData.crnCro).toFixed(2));
-  waitDaysElement.goldNft.get().innerHTML = "".concat(applyBoost(dailyWaitTotal, _BoostNfts.default.gold).toFixed(2), " CRN");
-  waitDaysElement.goldNftUsd.get().innerHTML = "$".concat((applyBoost(dailyWaitTotal, _BoostNfts.default.gold) * priceData.crnUsd).toFixed(2));
-  waitDaysElement.goldNftCro.get().innerHTML = "".concat((applyBoost(dailyWaitTotal, _BoostNfts.default.gold) * priceData.crnCro).toFixed(2));
+  waitDaysElement.noNft.set("".concat(dailyWaitTotal.toFixed(2), " CRN"));
+  waitDaysElement.noNftUsd.set("$".concat((dailyWaitTotal * priceData.crnUsd).toFixed(2)));
+  waitDaysElement.noNftCro.set((dailyWaitTotal * priceData.crnCro).toFixed(2));
+  waitDaysElement.bronzeNft.set("".concat(applyBoost(dailyWaitTotal, _BoostNfts.default.bronze).toFixed(2), " CRN"));
+  waitDaysElement.bronzeNftUsd.set("$".concat((applyBoost(dailyWaitTotal, _BoostNfts.default.bronze) * priceData.crnUsd).toFixed(2)));
+  waitDaysElement.bronzeNftCro.set((applyBoost(dailyWaitTotal, _BoostNfts.default.bronze) * priceData.crnCro).toFixed(2));
+  waitDaysElement.silverNft.set("".concat(applyBoost(dailyWaitTotal, _BoostNfts.default.silver).toFixed(2), " CRN"));
+  waitDaysElement.silverNftUsd.set("$".concat((applyBoost(dailyWaitTotal, _BoostNfts.default.silver) * priceData.crnUsd).toFixed(2)));
+  waitDaysElement.silverNftCro.set((applyBoost(dailyWaitTotal, _BoostNfts.default.silver) * priceData.crnCro).toFixed(2));
+  waitDaysElement.goldNft.set("".concat(applyBoost(dailyWaitTotal, _BoostNfts.default.gold).toFixed(2), " CRN"));
+  waitDaysElement.goldNftUsd.set("$".concat((applyBoost(dailyWaitTotal, _BoostNfts.default.gold) * priceData.crnUsd).toFixed(2)));
+  waitDaysElement.goldNftCro.set((applyBoost(dailyWaitTotal, _BoostNfts.default.gold) * priceData.crnCro).toFixed(2));
   const monthlyFeeElement = _Elements.default.data.monthlyFees;
-  monthlyFeeElement.tierOne.get().innerHTML = "".concat(monthlyFees.tierOne.toFixed(2), " CRO");
-  monthlyFeeElement.tierTwo.get().innerHTML = "".concat(monthlyFees.tierTwo.toFixed(2), " CRO");
-  monthlyFeeElement.tierThree.get().innerHTML = "".concat(monthlyFees.tierThree.toFixed(2), " CRO");
-  monthlyFeeElement.tierFour.get().innerHTML = "".concat(monthlyFees.tierFour.toFixed(2), " CRO");
-  monthlyFeeElement.total.get().innerHTML = "".concat(monthlyFees.total.toFixed(2), " CRO");
+  monthlyFeeElement.tierOne.set(monthlyFees.tierOne.toFixed(2));
+  monthlyFeeElement.tierOneUsd.set("$".concat((monthlyFees.tierOne * priceData.croUsd).toFixed(2)));
+  monthlyFeeElement.tierOneCrn.set((monthlyFees.tierOne * priceData.croCrn).toFixed(2));
+  monthlyFeeElement.tierTwo.set(monthlyFees.tierTwo.toFixed(2));
+  monthlyFeeElement.tierTwoUsd.set("$".concat((monthlyFees.tierTwo * priceData.croUsd).toFixed(2)));
+  monthlyFeeElement.tierTwoCrn.set((monthlyFees.tierTwo * priceData.croCrn).toFixed(2));
+  monthlyFeeElement.tierThree.set(monthlyFees.tierThree.toFixed(2));
+  monthlyFeeElement.tierThreeUsd.set("".concat((monthlyFees.tierThree * priceData.croUsd).toFixed(2)));
+  monthlyFeeElement.tierThreeCrn.set((monthlyFees.tierThree * priceData.croCrn).toFixed(2));
+  monthlyFeeElement.tierFour.set(monthlyFees.tierFour.toFixed(2));
+  monthlyFeeElement.tierFourUsd.set("$".concat((monthlyFees.tierFour * priceData.croUsd).toFixed(2)));
+  monthlyFeeElement.tierFourCrn.set((monthlyFees.tierFour * priceData.croCrn).toFixed(2));
+  monthlyFeeElement.total.set(monthlyFees.total.toFixed(2));
+  monthlyFeeElement.totalUsd.set("$".concat((monthlyFees.total * priceData.croUsd).toFixed(2)));
+  monthlyFeeElement.totalCrn.set((monthlyFees.total * priceData.croCrn).toFixed(2));
 };
 /** @returns { Promise< PriceData > } */
 
@@ -508,10 +548,15 @@ const getPrices = async () => {
   crnUsd = (await _axios.default.get(_Constants.default.crnUsdCGUrl)).data['cronodes']['usd'],
         croCrn = croUsd / crnUsd,
         crnCro = crnUsd / croUsd;
-  _Elements.default.data.prices.croUsd.get().innerHTML = "$".concat(croUsd.toFixed(2));
-  _Elements.default.data.prices.croCrn.get().innerHTML = croCrn.toFixed(2);
-  _Elements.default.data.prices.crnUsd.get().innerHTML = crnUsd.toFixed(2);
-  _Elements.default.data.prices.crnCro.get().innerHTML = crnCro.toFixed(2);
+
+  _Elements.default.data.prices.croUsd.set("$".concat(croUsd.toFixed(2)));
+
+  _Elements.default.data.prices.croCrn.set(croCrn.toFixed(2));
+
+  _Elements.default.data.prices.crnUsd.set(crnUsd.toFixed(2));
+
+  _Elements.default.data.prices.crnCro.set(crnCro.toFixed(2));
+
   return {
     croUsd,
     croCrn,

@@ -43,9 +43,17 @@ export default class Elements {
 		total: {
 			nodeAmount: new DataNode( 'total-node-amount-user-data' ),
 			noNft: new DataNode( 'total-daily-reward-user-data' ),
+			noNftUsd: new DataNode( 'total-daily-reward-user-data-usd' ),
+			noNftCro: new DataNode( 'total-daily-reward-user-data-cro' ),
 			bronzeNft: new DataNode( 'total-daily-reward-with-bronze-nft' ),
+			bronzeNftUsd: new DataNode( 'total-daily-reward-with-bronze-nft-usd' ),
+			bronzeNftCro: new DataNode( 'total-daily-reward-with-bronze-nft-cro' ),
 			silverNft: new DataNode( 'total-daily-reward-with-silver-nft' ),
-			goldNft: new DataNode( 'total-daily-reward-with-gold-nft' )
+			silverNftUsd: new DataNode( 'total-daily-reward-with-silver-nft-usd' ),
+			silverNftCro: new DataNode( 'total-daily-reward-with-silver-nft-cro' ),
+			goldNft: new DataNode( 'total-daily-reward-with-gold-nft' ),
+			goldNftUsd: new DataNode( 'total-daily-reward-with-gold-nft-usd' ),
+			goldNftCro: new DataNode( 'total-daily-reward-with-gold-nft-cro' )
 		},
 
 		waitDays: {
@@ -66,10 +74,20 @@ export default class Elements {
 
 		monthlyFees: {
 			tierOne: new DataNode( 'tier-one-monthly-fee-user-data' ),
+			tierOneUsd: new DataNode( 'tier-one-monthly-fee-user-data-usd' ),
+			tierOneCrn: new DataNode( 'tier-one-monthly-fee-user-data-crn' ),
 			tierTwo: new DataNode( 'tier-two-monthly-fee-user-data' ),
+			tierTwoUsd: new DataNode( 'tier-two-monthly-fee-user-data-usd' ),
+			tierTwoCrn: new DataNode( 'tier-two-monthly-fee-user-data-crn' ),
 			tierThree: new DataNode( 'tier-three-monthly-fee-user-data' ),
+			tierThreeUsd: new DataNode( 'tier-three-monthly-fee-user-data-usd' ),
+			tierThreeCrn: new DataNode( 'tier-three-monthly-fee-user-data-crn' ),
 			tierFour: new DataNode( 'tier-four-monthly-fee-user-data' ),
-			total: new DataNode( 'total-monthly-fee-user-data' )
+			tierFourUsd: new DataNode( 'tier-four-monthly-fee-user-data-usd' ),
+			tierFourCrn: new DataNode( 'tier-four-monthly-fee-user-data-crn' ),
+			total: new DataNode( 'total-monthly-fee-user-data' ),
+			totalUsd: new DataNode( 'total-monthly-fee-user-data-usd' ),
+			totalCrn: new DataNode( 'total-monthly-fee-user-data-crn' )
 		},
 
 		prices: {
