@@ -47,7 +47,7 @@ table {
 	border-spacing: 0;
 }
 
-td, th {
+span, td, th {
 	padding-top: 4px;
 	padding-bottom: 4px;
 }

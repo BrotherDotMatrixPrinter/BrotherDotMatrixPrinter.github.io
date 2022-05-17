@@ -49,9 +49,26 @@ const boostNfts = {
 
 }
 
+const tax = ( days, hasTaxNft ) => {
+
+	switch ( true ) {
+
+		case days >= 0 && days <= 5: return 0.50
+		case days >= 6 && days <= 10: return 0.40
+		case days >= 11 && days <= 15: return 0.30
+		case days > 15 && ! hasTaxNft: return 0.10
+		case days > 15 && hasTaxNft: return 0.05
+
+	}
+
+	return null
+
+}
+
 const getNodes = _ => {
 
-	const monthlyTax = document.getElementById( 'user-has-tax-nft' ).checked ? 0.05 : 0.10
+	const monthlyTax = document.getElementById( 'user-has-tax-nft' ).checked ? 0.05 : 0.10,
+		waitDays = parseInt( document.getElementById( 'user-wait-days' ).value )
 
 	const nodeAmount = {
 
@@ -77,17 +94,17 @@ const getNodes = _ => {
 
 	dailyReward.total = dailyReward.one + dailyReward.two + dailyReward.three + dailyReward.four
 
-	const monthlyReward = {
+	// const monthlyReward = {
 
-		one: applyTax( ( dailyReward.one * 30 ), monthlyTax ),
-		two: applyTax( ( dailyReward.two * 30 ), monthlyTax ),
-		three: applyTax( ( dailyReward.three * 30 ), monthlyTax ),
-		four: applyTax( ( dailyReward.four * 30 ), monthlyTax ),
-		total: 0
+	// 	one: applyTax( ( dailyReward.one * 30 ), monthlyTax ),
+	// 	two: applyTax( ( dailyReward.two * 30 ), monthlyTax ),
+	// 	three: applyTax( ( dailyReward.three * 30 ), monthlyTax ),
+	// 	four: applyTax( ( dailyReward.four * 30 ), monthlyTax ),
+	// 	total: 0
 
-	}
+	// }
 
-	monthlyReward.total = applyTax( ( monthlyReward.one + monthlyReward.two + monthlyReward.three + monthlyReward.four ), monthlyTax )
+	// monthlyReward.total = applyTax( ( monthlyReward.one + monthlyReward.two + monthlyReward.three + monthlyReward.four ), monthlyTax )
 
 	const monthlyFee = {
 
@@ -101,6 +118,32 @@ const getNodes = _ => {
 
 	monthlyFee.total = monthlyFee.one + monthlyFee.two + monthlyFee.three + monthlyFee.four
 
+	// Set User Days Total
+	const dailyWaitTotal = dailyReward.total * waitDays, dailyWaitTax = tax( waitDays, document.getElementById( 'user-has-tax-nft' ).checked )
+
+	switch ( dailyWaitTax ) {
+		case 0.50:
+			document.getElementById( 'user-wait-days-tax' ).innerHTML = 'Tax: 50%'
+			break
+		case 0.40:
+			document.getElementById( 'user-wait-days-tax' ).innerHTML = 'Tax: 40%'
+			break
+		case 0.30:
+			document.getElementById( 'user-wait-days-tax' ).innerHTML = 'Tax: 30%'
+			break
+		case 0.10:
+			document.getElementById( 'user-wait-days-tax' ).innerHTML = 'Tax: 10%'
+			break
+		case 0.05:
+			document.getElementById( 'user-wait-days-tax' ).innerHTML = 'Tax: 5%'
+			break
+	}
+
+	document.getElementById( 'user-wait-days-no-nft' ).innerHTML = `${ ( applyTax( dailyWaitTotal, dailyWaitTax ) ).toFixed( 2 ) } CRN`
+	document.getElementById( 'user-wait-days-bronze-nft' ).innerHTML = `${ applyTax( ( dailyWaitTotal + ( dailyWaitTotal * boostNfts.bronze ) ), dailyWaitTax ).toFixed( 2 ) } CRN`
+	document.getElementById( 'user-wait-days-silver-nft' ).innerHTML = `${ applyTax( ( dailyWaitTotal + ( dailyWaitTotal * boostNfts.silver ) ), dailyWaitTax ).toFixed( 2 ) } CRN`
+	document.getElementById( 'user-wait-days-gold-nft' ).innerHTML = `${ applyTax( ( dailyWaitTotal + ( dailyWaitTotal * boostNfts.gold ) ), dailyWaitTax ).toFixed( 2 ) } CRN`
+
 	// Set Total Nodes
 	document.getElementById( 'total-node-amount-user-data' ).innerHTML = `${ nodeAmount.total.toFixed( 0 ) } Nodes`
 
@@ -109,10 +152,10 @@ const getNodes = _ => {
 	document.getElementById( 'tier-one-daily-reward-with-bronze-nft' ).innerHTML = `${ ( dailyReward.one + ( dailyReward.one * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-one-daily-reward-with-silver-nft' ).innerHTML = `${ ( dailyReward.one + ( dailyReward.one * boostNfts.silver ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-one-daily-reward-with-gold-nft' ).innerHTML = `${ ( dailyReward.one + ( dailyReward.one * boostNfts.gold ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-one-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.one.toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-one-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.one + ( monthlyReward.one * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-one-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.one + ( monthlyReward.one * boostNfts.silver ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-one-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.one + ( monthlyReward.one * boostNfts.gold ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-one-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.one.toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-one-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.one + ( monthlyReward.one * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-one-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.one + ( monthlyReward.one * boostNfts.silver ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-one-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.one + ( monthlyReward.one * boostNfts.gold ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-one-monthly-fee-user-data' ).innerHTML = `${ monthlyFee.one.toFixed( 2 ) } CRO`
 
 	// Set Tier Two Data
@@ -120,10 +163,10 @@ const getNodes = _ => {
 	document.getElementById( 'tier-two-daily-reward-with-bronze-nft' ).innerHTML = `${ ( dailyReward.two + ( dailyReward.two * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-two-daily-reward-with-silver-nft' ).innerHTML = `${ ( dailyReward.two + ( dailyReward.two * boostNfts.silver ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-two-daily-reward-with-gold-nft' ).innerHTML = `${ ( dailyReward.two + ( dailyReward.two * boostNfts.gold ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-two-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.two.toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-two-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.two + ( monthlyReward.two * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-two-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.two + ( monthlyReward.two * boostNfts.silver ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-two-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.two + ( monthlyReward.two * boostNfts.gold ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-two-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.two.toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-two-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.two + ( monthlyReward.two * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-two-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.two + ( monthlyReward.two * boostNfts.silver ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-two-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.two + ( monthlyReward.two * boostNfts.gold ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-two-monthly-fee-user-data' ).innerHTML = `${ monthlyFee.two.toFixed( 2 ) } CRO`
 
 	// Set Tier Three Data
@@ -131,10 +174,10 @@ const getNodes = _ => {
 	document.getElementById( 'tier-three-daily-reward-with-bronze-nft' ).innerHTML = `${ ( dailyReward.three + ( dailyReward.three * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-three-daily-reward-with-silver-nft' ).innerHTML = `${ ( dailyReward.three + ( dailyReward.three * boostNfts.silver ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-three-daily-reward-with-gold-nft' ).innerHTML = `${ ( dailyReward.three + ( dailyReward.three * boostNfts.gold ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-three-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.three.toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-three-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.three + ( monthlyReward.three * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-three-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.three + ( monthlyReward.three * boostNfts.silver ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-three-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.three + ( monthlyReward.three * boostNfts.gold ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-three-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.three.toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-three-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.three + ( monthlyReward.three * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-three-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.three + ( monthlyReward.three * boostNfts.silver ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-three-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.three + ( monthlyReward.three * boostNfts.gold ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-three-monthly-fee-user-data' ).innerHTML = `${ monthlyFee.three.toFixed( 2 ) } CRO`
 
 	// Set Tier Four Data
@@ -142,10 +185,10 @@ const getNodes = _ => {
 	document.getElementById( 'tier-four-daily-reward-with-bronze-nft' ).innerHTML = `${ ( dailyReward.four + ( dailyReward.four * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-four-daily-reward-with-silver-nft' ).innerHTML = `${ ( dailyReward.four + ( dailyReward.four * boostNfts.silver ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-four-daily-reward-with-gold-nft' ).innerHTML = `${ ( dailyReward.four + ( dailyReward.four * boostNfts.gold ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-four-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.four.toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-four-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.four + ( monthlyReward.four * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-four-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.four + ( monthlyReward.four * boostNfts.silver ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'tier-four-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.four + ( monthlyReward.four * boostNfts.gold ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-four-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.four.toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-four-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.four + ( monthlyReward.four * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-four-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.four + ( monthlyReward.four * boostNfts.silver ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'tier-four-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.four + ( monthlyReward.four * boostNfts.gold ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'tier-four-monthly-fee-user-data' ).innerHTML = `${ monthlyFee.four.toFixed( 2 ) } CRO`
 
 	// Set Total Data
@@ -153,10 +196,10 @@ const getNodes = _ => {
 	document.getElementById( 'total-daily-reward-with-bronze-nft' ).innerHTML = `${ ( dailyReward.total + ( dailyReward.total * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'total-daily-reward-with-silver-nft' ).innerHTML = `${ ( dailyReward.total + ( dailyReward.total * boostNfts.silver ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'total-daily-reward-with-gold-nft' ).innerHTML = `${ ( dailyReward.total + ( dailyReward.total * boostNfts.gold ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'total-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.total.toFixed( 2 ) } CRN`
-	document.getElementById( 'total-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.total + ( monthlyReward.total * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'total-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.total + ( monthlyReward.total * boostNfts.silver ) ).toFixed( 2 ) } CRN`
-	document.getElementById( 'total-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.total + ( monthlyReward.total * boostNfts.gold ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'total-monthly-reward-user-data' ).innerHTML = `${ monthlyReward.total.toFixed( 2 ) } CRN`
+	// document.getElementById( 'total-monthly-reward-with-bronze-nft' ).innerHTML = `${ ( monthlyReward.total + ( monthlyReward.total * boostNfts.bronze ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'total-monthly-reward-with-silver-nft' ).innerHTML = `${ ( monthlyReward.total + ( monthlyReward.total * boostNfts.silver ) ).toFixed( 2 ) } CRN`
+	// document.getElementById( 'total-monthly-reward-with-gold-nft' ).innerHTML = `${ ( monthlyReward.total + ( monthlyReward.total * boostNfts.gold ) ).toFixed( 2 ) } CRN`
 	document.getElementById( 'total-monthly-fee-user-data' ).innerHTML = `${ monthlyFee.total.toFixed( 2 ) } CRO`
 
 }
@@ -164,6 +207,7 @@ const getNodes = _ => {
 window.addEventListener( 'load', () => {
 
 	document.getElementById( 'user-has-tax-nft' ).addEventListener( 'input', getNodes, false )
+	document.getElementById( 'user-wait-days' ).addEventListener( 'input', getNodes, false )
 	document.getElementById( 'tier-one-node-amount-user-input' ).addEventListener( 'input', getNodes, false )
 	document.getElementById( 'tier-two-node-amount-user-input' ).addEventListener( 'input', getNodes, false )
 	document.getElementById( 'tier-three-node-amount-user-input' ).addEventListener( 'input', getNodes, false )

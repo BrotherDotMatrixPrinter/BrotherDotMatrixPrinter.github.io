@@ -42,10 +42,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<span>
-			<label for="user-has-tax-nft">Tax NFT?</label>
-			<input type="checkbox" name="user-has-tax-nft" id="user-has-tax-nft" value="hasTaxNft">
-		</span>
 	</div>
 
 	<div>
@@ -101,6 +97,44 @@
 	</div>
 
 	<div>
+		<span>
+			<label for="user-wait-days">Days:</label>
+			<input type="number" name="user-wait-days" id="user-wait-days" min="0" value="1">
+		</span>
+		<span>
+			<label for="user-has-tax-nft">Tax NFT:</label>
+			<input type="checkbox" name="user-has-tax-nft" id="user-has-tax-nft" value="hasTaxNft">
+		</span>
+		<h4 id="user-wait-days-tax">Tax: 50%</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Boost NFT</th>
+					<th>Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>None</td>
+					<td id="user-wait-days-no-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Bronze</td>
+					<td id="user-wait-days-bronze-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Silver</td>
+					<td id="user-wait-days-silver-nft">0.00 CRN</td>
+				</tr>
+				<tr>
+					<td>Gold</td>
+					<td id="user-wait-days-gold-nft">0.00 CRN</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- <div>
 		<h4>Monthly Rewards (includes tax)</h4>
 		<table>
 			<thead>
@@ -150,7 +184,7 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</div> -->
 
 	<div>
 		<h4>Monthly Fees</h4>
@@ -181,6 +215,66 @@
 				<tr>
 					<td>Total</td>
 					<td id="total-monthly-fee-user-data">0.00 CRO</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<h4>Taxes</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Days since last claim</th>
+					<th>Tax percentage on claim</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>0 - 5</td>
+					<td>50%</td>
+				</tr>
+				<tr>
+					<td>6 - 10</td>
+					<td>40%</td>
+				</tr>
+				<tr>
+					<td>11 - 15</td>
+					<td>30%</td>
+				</tr>
+				<tr>
+					<td>15+ (without tax NFT)</td>
+					<td>10%</td>
+				</tr>
+				<tr>
+					<td>15+ (with tax NFT)</td>
+					<td>5%</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div>
+		<h4>Boost NFTs</h4>
+		<table>
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Boost Percentage</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Bronze</td>
+					<td>2%</td>
+				</tr>
+				<tr>
+					<td>Silver</td>
+					<td>5%</td>
+				</tr>
+				<tr>
+					<td>Gold</td>
+					<td>10%</td>
 				</tr>
 			</tbody>
 		</table>
