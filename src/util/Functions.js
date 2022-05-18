@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { Contract } from 'ethers'
+import { Web3Provider } from '@ethersproject/providers'
 import Elements from '../class/Elements.js'
 import NodeTiers from '../class/NodeTiers.js'
 import BoostNfts from '../class/BoostNfts.js'
@@ -238,4 +240,106 @@ export const getPrices = async () => {
 		crnUsd,
 		crnCro
 	}
+}
+
+export const printError = exception => {
+	console.info( '========================================' )
+	console.warn( `An Error Has Occurred: ${ typeof exception }` )
+	console.info( '========================================' )
+	console.warn( 'Please Contact The Developer' )
+	console.info( '========================================' )
+	console.warn( exception )
+	console.info( '========================================' )
+	window.alert( 'An Error Has Occurred, Contact The Developer' )
+}
+
+export const connectToMetamask = async () => {
+	if ( window.ethereum ) {
+		const rpcProvider = new Web3Provider( window.ethereum, 'any' )
+
+		await rpcProvider.send( 'eth_requestAccounts', [] )
+
+		return rpcProvider
+	}
+}
+
+/**
+ * My other repo has most of the contract functions and events
+ * @param { Web3Provider } rpcProvider
+ */
+export const getNodes = async ( rpcProvider ) => {
+	const result = await ( new Contract(
+		Constants.v2NodeManagementContractAddress,
+
+		[ {
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "account",
+					"type": "address"
+				}
+			],
+			"name": "getAllNodes",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "string",
+							"name": "name",
+							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "nodeTier",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "creationTime",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "lastClaimTime",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "lastPaidTime",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "paymentDueTime",
+							"type": "uint256"
+						},
+						{
+							"internalType": "bool",
+							"name": "hasMonthlyFee",
+							"type": "bool"
+						},
+						{
+							"internalType": "uint256",
+							"name": "extendedParam1",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "extendedParam2",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct CRNNodesManagement.NodeEntity[]",
+					"name": "_nodes",
+					"type": "tuple[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		} ],
+
+		rpcProvider
+	) ).getAllNodes( await rpcProvider.getSigner().getAddress() )
+
+	console.log( result )
 }

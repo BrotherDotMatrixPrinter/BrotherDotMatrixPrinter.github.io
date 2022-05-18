@@ -11,12 +11,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.17.10",
-    "@babel/core": "^7.17.12",
-    "@babel/preset-env": "^7.17.12",
-    "browserify": "^17.0.0"
+    "@babel/cli": "latest",
+    "@babel/core": "latest",
+    "@babel/preset-env": "latest",
+    "browserify": "latest"
   },
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "latest",
+    "ethers": "latest"
   }
 }

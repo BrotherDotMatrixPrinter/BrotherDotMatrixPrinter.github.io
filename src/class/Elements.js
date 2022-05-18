@@ -1,14 +1,17 @@
 import DataNode from './DataNode.js'
+import InputNode from './InputNode.js'
 
 export default class Elements {
 
 	static inputs = {
-		tierOneNodeAmount: new DataNode( 'tier-one-node-amount-user-input' ),
-		tierTwoNodeAmount: new DataNode( 'tier-two-node-amount-user-input' ),
-		tierThreeNodeAmount: new DataNode( 'tier-three-node-amount-user-input' ),
-		tierFourNodeAmount: new DataNode( 'tier-four-node-amount-user-input' ),
-		waitDays: new DataNode( 'user-wait-days' ),
-		hasTaxNft: new DataNode( 'user-has-tax-nft' )
+		tierOneNodeAmount: new InputNode( 'tier-one-node-amount-user-input' ),
+		tierTwoNodeAmount: new InputNode( 'tier-two-node-amount-user-input' ),
+		tierThreeNodeAmount: new InputNode( 'tier-three-node-amount-user-input' ),
+		tierFourNodeAmount: new InputNode( 'tier-four-node-amount-user-input' ),
+		waitDays: new InputNode( 'user-wait-days' ),
+		hasTaxNft: new InputNode( 'user-has-tax-nft' ),
+		refreshPricesButton: new InputNode( 'refresh-prices-button' ),
+		connectMetamaskButton: new InputNode( 'connect-metamask-button' )
 	}
 
 	static data = {

@@ -29,7 +29,7 @@ div, h4, table, thead, tbody, tr {
 	width: 100%;
 }
 
-div, table, tr, td, th {
+div, table, tr, td, th, button {
 	border: 0.5px solid white;
 }
 
@@ -42,7 +42,7 @@ h4, td, th, input {
 	text-align: center;
 }
 
-h4, td, th, label {
+h4, td, th, label, button {
 	color: white;
 }
 
@@ -59,4 +59,13 @@ table {
 span, td, th {
 	padding-top: 4px;
 	padding-bottom: 4px;
+}
+
+button {
+	background-color: black;
+	margin-bottom: 4px;
+	margin-top: 4px;
+	padding: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
 }
