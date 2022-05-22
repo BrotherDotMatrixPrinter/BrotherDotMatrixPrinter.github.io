@@ -37,7 +37,8 @@ const App = () => {
 
     <Prices priceData = { priceData } />
 
-    <div>&nbsp;</div>
+    {/* This is just a cheap fix for vertical scrolling */}
+    <div style = { { lineHeight: '0px' } }>&nbsp;</div>
 
   </div>
 
