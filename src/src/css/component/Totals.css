@@ -1,6 +1,5 @@
 div#Totals {
 	align-items: center;
-	box-shadow: 0 0 5px 1px black;
 	display: flex;
 	flex-direction: column;
 	padding: 8px;
