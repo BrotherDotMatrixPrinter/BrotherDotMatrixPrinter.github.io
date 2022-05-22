@@ -37,7 +37,7 @@ const Totals = props => {
 
 				<tr>
 					<td>Total Reward Before Tax:</td>
-					<td>{ props.totalData.dailyReward.toFixed( 2 ) } CRN</td>
+					<td>{ props.totalData.totalRewardBeforeTax.toFixed( 2 ) } CRN</td>
 				</tr>
 			</tbody>
 
@@ -77,8 +77,8 @@ const Totals = props => {
 
 			<tbody>
 				<tr>
-					<td>ROI in CRN:</td>
-					<td>{ props.totalData.roi * props.totalData.daysWaited } Days</td>
+					<td>ROI in CRN (round up to nearest month):</td>
+					<td>{ ( props.totalData.roi * props.totalData.daysWaited ).toFixed( 2 ) } Days</td>
 				</tr>
 			</tbody>
 
