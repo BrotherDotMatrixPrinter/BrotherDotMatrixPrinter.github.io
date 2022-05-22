@@ -1,0 +1,29 @@
+div#Prices {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	padding: 8px;
+	width: 100%;
+}
+
+div#Prices table {
+	display: flex;
+	flex-direction: column;
+}
+
+div#Prices table tbody {
+	display: flex;
+	gap: 4px;
+	flex-direction: column;
+}
+
+div#Prices table tbody tr {
+	border-bottom: 1px solid black;
+	display: flex;
+	gap: 90px;
+	justify-content: space-between;
+}
+
+div#Prices table thead tr th, div#Prices table tbody tr td {
+	color: #E0E0CE;
+}
