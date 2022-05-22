@@ -1,0 +1,33 @@
+div#UserInput {
+	box-shadow: 0 0 5px 1px black;
+	display: flex;
+	flex-direction: column;
+	padding: 8px;
+	width: 100%;
+}
+
+div#UserInput span {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	margin: 4px;
+}
+
+div#UserInput span label {
+	color: #E0E0CE;
+}
+
+div#UserInput span input {
+	background-color: #474747;
+	border: 1px solid black;
+	color: #E0E0CE;
+	padding: 2px;
+	text-align: center;
+}
+
+div#UserInput span select {
+	background-color: #474747;
+	border: 1px solid black;
+	color: #E0E0CE;
+	padding: 2px;
+}
