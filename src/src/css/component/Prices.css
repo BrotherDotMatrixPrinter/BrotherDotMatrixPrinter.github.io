@@ -20,7 +20,7 @@ div#Prices table tbody {
 div#Prices table tbody tr {
 	border-bottom: 1px solid black;
 	display: flex;
-	gap: 90px;
+	gap: 50px;
 	justify-content: space-between;
 }
 

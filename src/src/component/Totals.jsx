@@ -36,8 +36,8 @@ const Totals = props => {
 				</tr>
 
 				<tr>
-					<td>Total Reward Before Tax:</td>
-					<td>{ props.totalData.totalRewardBeforeTax.toFixed( 2 ) } CRN</td>
+					<td>Total Reward<br/>Before Tax:</td>
+					<td><br/>{ props.totalData.totalRewardBeforeTax.toFixed( 2 ) } CRN</td>
 				</tr>
 			</tbody>
 
@@ -53,8 +53,8 @@ const Totals = props => {
 				</tr>
 
 				<tr>
-					<td>Total Reward After Tax:</td>
-					<td>{ props.totalData.totalRewardAfterTax.toFixed( 2 ) } CRN</td>
+					<td>Total Reward<br/>After Tax:</td>
+					<td><br/>{ props.totalData.totalRewardAfterTax.toFixed( 2 ) } CRN</td>
 				</tr>
 			</tbody>
 
@@ -70,15 +70,15 @@ const Totals = props => {
 				</tr>
 
 				<tr>
-					<td>Total Reward After Boost:</td>
-					<td>{ props.totalData.totalRewardAfterBoost.toFixed( 2 ) } CRN</td>
+					<td>Total Reward<br/>After Boost:</td>
+					<td><br/>{ props.totalData.totalRewardAfterBoost.toFixed( 2 ) } CRN</td>
 				</tr>
 			</tbody>
 
 			<tbody>
 				<tr>
-					<td>ROI in CRN (round up to nearest month):</td>
-					<td>{ ( props.totalData.roi * props.totalData.daysWaited ).toFixed( 2 ) } Days</td>
+					<td>ROI in CRN<br/>(approximate):</td>
+					<td><br/>{ ( ( props.totalData.roi * props.totalData.daysWaited ) || 0 ).toFixed( 2 ) } Days</td>
 				</tr>
 			</tbody>
 

@@ -21,7 +21,7 @@ div#Totals table tbody {
 div#Totals table tbody tr {
 	border-bottom: 1px solid black;
 	display: flex;
-	gap: 70px;
+	gap: 50px;
 	justify-content: space-between;
 }
 
