@@ -37,6 +37,8 @@ const App = () => {
 
     <Prices priceData = { priceData } />
 
+    <div>&nbsp;</div>
+
   </div>
 
 }
